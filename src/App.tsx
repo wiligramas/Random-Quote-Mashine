@@ -1,0 +1,73 @@
+import { useState } from 'react'
+import quotes from './assets/quotes.json'
+import { FaTwitter, FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
+import './App.css'
+
+  interface Quote {
+    quote: string;
+    author: string;
+  }
+
+  const getRandomQuote = (): Quote => {
+    return quotes[Math.floor(Math.random() * quotes.length)];
+  }
+
+
+  const getRandomColor = (): string => {
+    const red = Math.floor(Math.random() * 128);
+    const greean = Math.floor(Math.random() * 128);
+    const blue = Math.floor(Math.random() * 128);
+      
+    return `rgb(${red}, ${greean}, ${blue})`;
+  }
+
+    const transition = "all 1s"
+
+function App() {
+  const [quote, setQuote] = useState<Quote>(getRandomQuote());
+  const [randomColor, setRandomColor] = useState<string>(getRandomColor());
+  
+
+
+  const changeQuote = ()=> {
+    setQuote(getRandomQuote());
+    setRandomColor(getRandomColor());
+  }
+
+  
+  return (
+    <div>
+      <div className="background" style={{ backgroundColor: randomColor, transition }}>
+        <div id="quote-box">
+          <div className="quote-content" style={{ color: randomColor }}>
+            <FaQuoteLeft size="30" style={{marginRight: "10px"}}/>
+            <h2 id="text"> {quote.quote} </h2>    
+            <FaQuoteRight size='30' style={{marginLeft: '10px'}}/> 
+            <h4 id="author">- {quote.author} </h4>
+          </div>
+
+          <div className="buttons">
+            <a href="https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=%22We%20can%20easily%20forgive%20a%20child%20who%20is%20afraid%20of%20the%20dark%3B%20the%20real%20tragedy%20of%20life%20is%20when%20men%20are%20afraid%20of%20the%20light.%22%20Plato"
+               id="tweet-quote"
+               style={{
+                background: randomColor,
+                marginRight: "10px",
+                transition
+               }}
+            >
+              <FaTwitter color="white" />
+            </a>
+
+            <button id="new-quote" onClick={changeQuote} style={{ background: randomColor, transition }}>
+               Change Quote
+            </button>  
+          </div>
+
+              
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default App;
