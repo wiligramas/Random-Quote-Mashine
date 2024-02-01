@@ -1,4 +1,4 @@
-![preview](./.github/maquina-de-citacao.png)
+![preview](./maquina-de-citacao.png)
 
 
 > 💥 Trilha Front End Development Libraries
